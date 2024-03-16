@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     @include('layouts.headerLink')
+    @yield('style')
 </head>
 
 <body>
@@ -34,5 +35,6 @@
     </div>
 
     @include('layouts.footerLink')
+    @yield('script')
 </body>
 </html>

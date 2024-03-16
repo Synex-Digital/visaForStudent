@@ -26,7 +26,7 @@
                         <li><a href="task.html"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                         <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li>
 
-                        <li>
+                        <li class="text-white">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-primary d-flex"><span>Log out</span></button>

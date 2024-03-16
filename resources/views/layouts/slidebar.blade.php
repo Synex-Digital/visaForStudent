@@ -34,6 +34,17 @@
                             <li><a href="dashboard-03.html">Project</a></li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="#">
+                            <i data-feather="user" class="text-white"></i>
+                            <span>Country </span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a  href="{{ route('country-blog.index') }}">Country list</a></li>
+                            <li><a  href="{{ route('country-blog.create') }}">Country Create</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             {{-- <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div> --}}
