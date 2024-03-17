@@ -8,7 +8,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6 ps-0">
-                    <h3>Content Create</h3>
+                    <h3>Add Country</h3>
                 </div>
                 <div class="col-sm-6 pe-0">
                     <ol class="breadcrumb">
@@ -127,7 +127,7 @@
                     </div>
 
                 </div>
-                <button class="btn btn-primary block">Add Content</button>
+                <button class="btn btn-primary block">Add Country</button>
             </form>
         </div>
     </div>

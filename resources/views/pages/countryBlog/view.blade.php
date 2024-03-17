@@ -53,7 +53,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6 ps-0">
-                    <h3>Country Content</h3>
+                    <h3>Country</h3>
                 </div>
                 <div class="col-sm-6 pe-0">
                     <ol class="breadcrumb">
@@ -208,15 +208,21 @@
             </div>
         </div>
         <div class="card-body">
+            <section class="mb-3">
             @forelse ($country->contents as $content)
-                <div id="content">
+                <a class="btn btn-sm btn-outline-dark" href="#{{ $content->title }}">{{ $content->title }}</a>
+            @empty
+            @endforelse
+        </section>
+            @forelse ($country->contents as $content)
+                <div id="{{ $content->title }}">
                     <div class="row mb-3">
-                        <div class="col-12 mb-3 d-flex justify-content-between">
-                            <h2>{{ $content->title }}</h2>
-                            <a class="btn btn-sm btn-outline-dark" href="#">Edit</a>
-                        </div>
                         <div class="col-12">
-                            <p>{!! $content->title !!}</p>
+                            <p>{!! $content->content !!}</p>
+                        </div>
+                        <div class="col-12 mb-3 d-flex justify-content-between">
+                            {{-- <h2>{{ $content->title }}</h2> --}}
+                            <a class="btn btn-sm btn-outline-dark" href="#">Edit</a>
                         </div>
                     </div>
                 </div>

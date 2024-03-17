@@ -144,6 +144,13 @@ class CountryBlogController extends Controller
      */
     public function destroy(CountryBlog $countryBlog)
     {
-        //
+    // Delete the contents associated with the country blog
+    $countryBlog->contents()->delete();
+
+    // Then delete the country blog itself
+    $countryBlog->delete();
+
+    // Optionally, you can return a response indicating success or redirect to another route
+    return back()->with('succ', 'Country blog and its contents have been deleted successfully.');
     }
 }
