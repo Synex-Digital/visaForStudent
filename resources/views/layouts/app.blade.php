@@ -25,7 +25,7 @@
 
             @include('layouts.slidebar')
 
-            <div class="page-body">
+            <div class="page-body ">
                 @yield('content')
             </div>
 

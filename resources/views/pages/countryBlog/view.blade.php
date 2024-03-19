@@ -156,13 +156,107 @@
             </div>
         </div>
     </div>
+    {{-- faq modal --}}
+    <div class="modal fade" id="faqmodal" tabindex="-1" aria-labelledby="faqmodal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <form action="{{ route('faq.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $country->id }}">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="faqmodal">Add Faq</h1>
+
+                        <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body dark-modal">
+                        <div class="mb-3">
+                            <label class="form-label">Question*</label>
+                            <input type="hidden" name="country_id" id="" value="{{$country->id}}">
+                            <input type="text" name="question" value="{{ old('question') }}"
+                                class="form-control @error('question') is-invalid @enderror" placeholder="">
+                            @error('question')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Answer*</label>
+
+                            {{-- <input type="text" name="title" value="{{ old('title') }}"
+                                class="form-control @error('title') is-invalid @enderror" placeholder="Title"> --}}
+                            <textarea class="form-control" name="answer" id="summernote" cols="30" rows="10" placeholder="">{{ old('answer') }}</textarea>
+
+                            @error('answer')
+                                    <strong class="text-sm text-danger">{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-dark" id="submitButton" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- faq edit modal --}}
+    <div class="modal fade" id="faqEditModal" tabindex="-1" aria-labelledby="faqEditModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <form action="{{ route('faq.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $country->id }}">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="faqmodal">Update Faq</h1>
+
+                        <button class="btn-close py-0" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body dark-modal">
+                        <div class="mb-3">
+                            <label class="form-label">Question*</label>
+                            <input type="hidden" name="country_id" id="" value="{{$country->id}}">
+                            <input type="text" name="question" id="editquestion"
+                                class="form-control @error('question') is-invalid @enderror" placeholder="">
+                            @error('question')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Answer*</label>
+
+                            {{-- <input type="text" name="title" value="{{ old('title') }}"
+                                class="form-control @error('title') is-invalid @enderror" placeholder="Title"> --}}
+                            <textarea class="form-control" name="answer" id="summernote" cols="30" rows="10" placeholder="">{{ old('answer') }}</textarea>
+
+                            @error('answer')
+                                    <strong class="text-sm text-danger">{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-dark" id="submitButton" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     {{-- Breadcrumb --}}
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-sm-6 ps-0">
-                    <h3>Country Content</h3>
+                    <h3>Update Country</h3>
                 </div>
                 <div class="col-sm-6 pe-0">
                     <ol class="breadcrumb">
@@ -364,14 +458,29 @@
             </form>
         </div>
     </div>
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <h3>Country Content</h3>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class=" breadcrumb     " style="margin-right: 0 !important;">
+                <a class="btn btn-dark me-2" href="{{ route('country-blog.index') }}">Back</a>
+                <button class="btn btn-outline-info-2x me-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalfullscreensm">Add content</button>
+                <button class="btn btn-outline-primary-2x me-2" type="button" data-bs-toggle="modal" data-bs-target="#faqmodal">Add Faq</button>
+                </div>
 
+            </div>
+        </div>
+    </div>
+</div>
     <div class="card">
         <div class="card-header  d-flex justify-content-between" style="padding-bottom:0 !important; ">
             <h4>Content Title</h4>
             <div>
-                <a class="btn btn-dark" href="{{ route('country-blog.index') }}">Back</a>
-                <button class="btn btn-outline-info-2x" type="button" data-bs-toggle="modal"
-                    data-bs-target="#exampleModalfullscreensm">Add content</button>
+
+
             </div>
         </div>
         <div class="card-body">
@@ -401,6 +510,37 @@
             @empty
                 No Data found
             @endforelse
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header  d-flex justify-content-between" style="padding-bottom:0 !important; ">
+            <h4>Faqs</h4>
+            <div>
+
+
+            </div>
+        </div>
+<div class="card-body">
+
+    @forelse ($country->faqs as $faq)
+        <div class="">
+            <p>{{$faq->question}}</p>
+            <p>{{$faq->answer}}</p>
+            <div class="row mb-3 ">
+                <div class="col-12 mb-3 ">
+                    {{-- <h2>{{ $content->title }}</h2> --}}
+                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-dark editfaq"  id="editfaq"  data-id="{{ $faq->id}}"  data-bs-toggle="modal" data-bs-target="#faqEditModal" >Edit</a>
+                    {{-- <a class="btn btn-sm btn-outline-dark" href="{{route('faq.edit',$faq->id)}}">Edit</a> --}}
+                    <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteID('{{ $faq->id }}')"
+                        data-bs-toggle="modal" data-bs-target="#tooltipmodal">Delete</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+    @empty
+        No Data found
+    @endforelse
 
         </div>
     </div>
@@ -466,5 +606,42 @@
             // Set the form action dynamically
             document.getElementById('deleteForm').action = "{{ route('blog-item.destroy', ':id') }}".replace(':id', id);
         }
+    </script>
+    <script>
+        $(document).ready(function(){
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
+
+
+$('body').on('click', '.editfaq', function () {
+var id = $(this).data('id');
+
+$.ajax({
+    url: "{{route('faq.edit',".id.")}}",
+    type: 'GET',
+    success: function (data) {
+        alert(JSON.stringify(data)); // Log data to console for debugging
+
+        $('#editquestion').val(data.question);
+        $('#answer').val(data.answer);
+    },
+    error: function (error) {
+        console.error('Error:', error);
+    }
+});
+});
+
+
+
+});
+
+
+
     </script>
 @endsection
