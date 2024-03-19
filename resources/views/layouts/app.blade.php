@@ -34,7 +34,7 @@
 
     </div>
 
-    @include('layouts.footerLink')
     @yield('script')
+    @include('layouts.footerLink')
 </body>
 </html>

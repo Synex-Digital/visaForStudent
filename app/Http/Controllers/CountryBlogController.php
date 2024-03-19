@@ -65,10 +65,11 @@ class CountryBlogController extends Controller
                 $country->banner   = Photo::$name;
             }
             $country->save();
+            $countrty_id = $country->id;
 
             DB::commit();
-
-            return back()->with('succ', 'Country added successfully');
+            return redirect(route('country-blog.show',$countrty_id))->with('succ', 'Country added successfully');
+            // return back()->with('succ', 'Country added successfully');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('err', 'Check again! something wrong with form.');
@@ -100,7 +101,7 @@ class CountryBlogController extends Controller
     {
         $request->validate([
             'name'          => 'required',
-            'title'         => 'required',
+            'country_title' => 'required',
             'description'   => 'required',
         ]);
 
@@ -109,7 +110,7 @@ class CountryBlogController extends Controller
             $country = $countryBlog;
             $country->name          = $request->name;
             $country->slugs         = Str::slug($request->name);
-            $country->title         = $request->title;
+            $country->title         = $request->country_title;
             $country->description   = $request->description;
 
             //seo

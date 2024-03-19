@@ -24,7 +24,7 @@
 
     <div class="card">
         <div class="card-header d-flex justify-content-end">
-            <a class="btn btn-sm btn-dark" href="{{ route('country-blog.index') }}">Country Content</a>
+            <a class="btn btn-sm btn-dark" href="{{ route('country-blog.index') }}">All Country Lists</a>
         </div>
         <div class="card-body">
             <form action="{{ route('country-blog.store') }}" method="post" enctype="multipart/form-data">
@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="mb-3">
-                            <label class="form-label">Name*</label>
+                            <label class="form-label">Country Name*</label>
                             <input type="text" name="name" value="{{ old('name') }}"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="Name">
                             @error('name')
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Title*</label>
+                            <label class="form-label">Country Title*</label>
                             <input type="text" name="title" value="{{ old('title') }}"
                                 class="form-control @error('title') is-invalid @enderror" placeholder="Title">
                             @error('title')
@@ -54,9 +54,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Description*</label>
+                            <label class="form-label">Country Description*</label>
                             <textarea type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                                placeholder="Description">{{ old('description') }}</textarea>
+                                placeholder="Short Description">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -66,33 +66,38 @@
 
                         <hr>
 
-                        <div class="mb-3">
-                            <label class="form-label">Thumbnail* <span
-                                    class="badge badge-light text-dark tag-pills-sm-mb">w:640 / h:780</span></label>
-                            <input type="file" name="thumbnail"
-                                class="form-control @error('thumbnail') is-invalid @enderror">
-                            @error('thumbnail')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Banner* <span
-                                    class="badge badge-light text-dark tag-pills-sm-mb">w:2050 / h:605</span></label>
-                            <input type="file" name="banner" class="form-control @error('banner') is-invalid @enderror">
-                            @error('banner')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Country Thumbnail* <span
+                                            class="badge badge-light text-dark tag-pills-sm-mb">w:640 / h:780</span></label>
+                                    <input type="file" name="thumbnail"
+                                        class="form-control @error('thumbnail') is-invalid @enderror">
+                                    @error('thumbnail')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label"> Country Banner* <span
+                                            class="badge badge-light text-dark tag-pills-sm-mb">w:2050 / h:605</span></label>
+                                    <input type="file" name="banner" class="form-control @error('banner') is-invalid @enderror">
+                                    @error('banner')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                     <div class="col-md-5">
                         <div class="mb-3">
-                            <label class="form-label">Seo Title</label>
+                            <label class="form-label"> Seo Title</label>
                             <input type="text" name="seo_title"
                                 class="form-control @error('seo_title') is-invalid @enderror" placeholder="Title">
                             @error('seo_title')

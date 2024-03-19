@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CountryBlogItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\String_;
 
 class CountryBlogItemController extends Controller
 {
@@ -64,24 +65,40 @@ class CountryBlogItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CountryBlogItems $countryBlogItems)
+    public function edit(string $id)
+
     {
-        //
+
+         $countryBlog = CountryBlogItems::find($id);
+        return view('pages.countryBlog.edit-content',[
+            'countryBlog'=> $countryBlog,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CountryBlogItems $countryBlogItems)
+    public function update(Request $request,string $id)
     {
-        //
+
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+        $countryBlogItems = CountryBlogItems::find($id);
+        $countryBlogItems->title = $request->title;
+        $countryBlogItems->content = $request->content;
+        $countryBlogItems->save();
+        return redirect(route('country-blog.show',$countryBlogItems->country_blog_id));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CountryBlogItems $countryBlogItems)
+    public function destroy(string $id)
     {
-        //
+
+       CountryBlogItems::find($id)->delete();
+        return back();
     }
 }
