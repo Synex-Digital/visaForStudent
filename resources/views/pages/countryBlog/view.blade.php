@@ -204,11 +204,13 @@
         </div>
     </div>
     {{-- faq edit modal --}}
-    <div class="modal fade" id="faqEditModal" tabindex="-1" aria-labelledby="faqEditModal" aria-hidden="true">
+
+        <div class="modal fade" id="faqEditModal" tabindex="-1" role="dialog" aria-labelledby="faqEditModal" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <form action="{{ route('faq.store') }}" method="POST">
-                    @csrf
+                <form method="POST" id="editform" name="editform" enctype="multipart/form-data">
+                    @method('PUT')
+
                     <input type="hidden" name="id" value="{{ $country->id }}">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="faqmodal">Update Faq</h1>
@@ -218,7 +220,7 @@
                     <div class="modal-body dark-modal">
                         <div class="mb-3">
                             <label class="form-label">Question*</label>
-                            <input type="hidden" name="country_id" id="" value="{{$country->id}}">
+                            <input type="hidden" name="faq_id" id="faq_id" >
                             <input type="text" name="question" id="editquestion"
                                 class="form-control @error('question') is-invalid @enderror" placeholder="">
                             @error('question')
@@ -233,7 +235,7 @@
 
                             {{-- <input type="text" name="title" value="{{ old('title') }}"
                                 class="form-control @error('title') is-invalid @enderror" placeholder="Title"> --}}
-                            <textarea class="form-control" name="answer" id="summernote" cols="30" rows="10" placeholder="">{{ old('answer') }}</textarea>
+                            <textarea class="form-control" name="answer" id="editanswer" cols="30" rows="10" placeholder="">{{ old('answer') }}</textarea>
 
                             @error('answer')
                                     <strong class="text-sm text-danger">{{ $message }}</strong>
@@ -243,8 +245,8 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-dark" id="submitButton" type="submit">Add</button>
+
+                        <button class="btn btn-dark" id="save-btn" type="submit">Update</button>
                     </div>
                 </form>
             </div>
@@ -521,7 +523,7 @@
 
             </div>
         </div>
-<div class="card-body">
+<div class="card-body " id="tablerow">
 
     @forelse ($country->faqs as $faq)
         <div class="">
@@ -530,6 +532,7 @@
             <div class="row mb-3 ">
                 <div class="col-12 mb-3 ">
                     {{-- <h2>{{ $content->title }}</h2> --}}
+                    {{-- <a href="{{ route('faq.edit',$faq->id) }}" class="btn btn-sm btn-outline-dark editfaq" >Edit</a> --}}
                     <a href="javascript:void(0)" class="btn btn-sm btn-outline-dark editfaq"  id="editfaq"  data-id="{{ $faq->id}}"  data-bs-toggle="modal" data-bs-target="#faqEditModal" >Edit</a>
                     {{-- <a class="btn btn-sm btn-outline-dark" href="{{route('faq.edit',$faq->id)}}">Edit</a> --}}
                     <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteID('{{ $faq->id }}')"
@@ -610,38 +613,85 @@
     <script>
         $(document).ready(function(){
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+             });
+        $('body').on('click', '.editfaq', function () {
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/faq/' + id + '/edit',
+                type: 'GET',
+                success: function (data) {
+                    $('#editanswer').val(data.answer);
+                    $('#editquestion').val(data.question);
+                    $('#faq_id').val(data.id);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+
+        $("#editform").submit(function(e){
+
+
+
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+e.preventDefault();
+$("#save-btn").attr("disabled", true);
+//  var data = $("#editform").serialize();
+ var data = new FormData($('#editform')[0]);
+//var formData = new FormData();
 
+// Serialize the form data and append it to FormData
+// $.each($('#editform').serializeArray(), function (index, field) {
+//     formData.append(field.name, field.value);
+// });
 
+// var imageFile = $('#editimage')[0].files[0];
+// formData.append('editimage', imageFile);
 
-
-$('body').on('click', '.editfaq', function () {
-var id = $(this).data('id');
-
+ var faq_id = $("#faq_id").val();
 $.ajax({
-    url: "{{route('faq.edit',".id.")}}",
-    type: 'GET',
-    success: function (data) {
-        alert(JSON.stringify(data)); // Log data to console for debugging
 
-        $('#editquestion').val(data.question);
-        $('#answer').val(data.answer);
-    },
-    error: function (error) {
-        console.error('Error:', error);
+    url: "/faq/" + faq_id,
+    type:"POST",
+    data:data,
+    cache:false,
+    processData: false,
+    contentType: false,
+
+
+    success:function(data){
+        $("#save-btn").attr("disabled", false);
+        $("#editform").trigger('reset');
+        $('#faqEditModal').modal('hide');
+        $("#tablerow").load(location.href+' #tablerow');
+
+
+        // var post = '<tr id="post_id_' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.description + '</td>';
+        // post += '<td><a href="javascript:void(0)" class="editbtn"  id="editdata" data-id="' + data.id + '" class="btn btn-info">Edit</a></td>';
+        // post += '<td><a href="javascript:void(0)" class="deletebtn"  id="deletebtn"  data-id="' + data.id + '" class="btn btn-danger delete-post">Delete</a></td></tr>';
+        // $("#post_id_" + data.id).replaceWith(post);
+        // $("#editbtn").attr("disabled", false);
+        // $("#editform").trigger('reset');
     }
 });
 });
 
 
 
-});
+        });
 
 
 
     </script>
+
 @endsection

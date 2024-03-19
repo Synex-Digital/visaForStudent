@@ -54,7 +54,6 @@ class FaqController extends Controller
     public function edit(string $id)
     {
         $data = Faq::find($id);
-
         return response()->json($data);
     }
 
@@ -63,8 +62,15 @@ class FaqController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        Faq::where('id',$id)->update([
+            'question'  => $request->question,
+            'answer'  =>$request->answer,
+        ]);
+        $faq = '2';
+        return response()->json($faq);
     }
+
+
 
     /**
      * Remove the specified resource from storage.
