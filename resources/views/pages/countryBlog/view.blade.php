@@ -607,17 +607,18 @@
         function setDeleteID(id) {
             document.getElementById('deleteID').value = id;
             // Set the form action dynamically
-            document.getElementById('deleteForm').action = "{{ route('blog-item.destroy', ':id') }}".replace(':id', id);
+            document.getElementById('deleteForm').action = "{{ route('faq.destroy', ':id') }}".replace(':id', id);
         }
     </script>
     <script>
-        $(document).ready(function(){
-
+$(document).ready(function(){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
              });
+
+             //edit
         $('body').on('click', '.editfaq', function () {
             var id = $(this).data('id');
             $.ajax({
@@ -633,62 +634,39 @@
                 }
             });
         });
-
-        $("#editform").submit(function(e){
-
-
-
-
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-e.preventDefault();
-$("#save-btn").attr("disabled", true);
-//  var data = $("#editform").serialize();
- var data = new FormData($('#editform')[0]);
-//var formData = new FormData();
-
-// Serialize the form data and append it to FormData
-// $.each($('#editform').serializeArray(), function (index, field) {
-//     formData.append(field.name, field.value);
-// });
-
-// var imageFile = $('#editimage')[0].files[0];
-// formData.append('editimage', imageFile);
-
- var faq_id = $("#faq_id").val();
-$.ajax({
-
-    url: "/faq/" + faq_id,
-    type:"POST",
-    data:data,
-    cache:false,
-    processData: false,
-    contentType: false,
-
-
-    success:function(data){
-        $("#save-btn").attr("disabled", false);
-        $("#editform").trigger('reset');
-        $('#faqEditModal').modal('hide');
-        $("#tablerow").load(location.href+' #tablerow');
-
-
-        // var post = '<tr id="post_id_' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.description + '</td>';
-        // post += '<td><a href="javascript:void(0)" class="editbtn"  id="editdata" data-id="' + data.id + '" class="btn btn-info">Edit</a></td>';
-        // post += '<td><a href="javascript:void(0)" class="deletebtn"  id="deletebtn"  data-id="' + data.id + '" class="btn btn-danger delete-post">Delete</a></td></tr>';
-        // $("#post_id_" + data.id).replaceWith(post);
-        // $("#editbtn").attr("disabled", false);
-        // $("#editform").trigger('reset');
-    }
-});
-});
-
-
-
+        //edit update
+    $("#editform").submit(function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
+        e.preventDefault();
+        $("#save-btn").attr("disabled", true);
+        var data = new FormData($('#editform')[0]);
+        var faq_id = $("#faq_id").val();
+            $.ajax({
+
+                url: "/faq/" + faq_id,
+                type:"POST",
+                data:data,
+                cache:false,
+                processData: false,
+                contentType: false,
+
+
+                success:function(data){
+                    $("#save-btn").attr("disabled", false);
+                    $("#editform").trigger('reset');
+                    $('#faqEditModal').modal('hide');
+                    $("#tablerow").load(location.href+' #tablerow');
+                }
+            });
+    });
+
+
+
+});
 
 
 
