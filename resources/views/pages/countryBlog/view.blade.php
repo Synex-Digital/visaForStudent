@@ -140,6 +140,8 @@
                             {{-- <input type="text" name="title" value="{{ old('title') }}"
                                 class="form-control @error('title') is-invalid @enderror" placeholder="Title"> --}}
                             <textarea class="form-control" name="content" id="summernote" cols="30" rows="10" placeholder="Content">{{ old('content') }}</textarea>
+                            <p>Characters left: <span id="charCount">3500</span></p>
+
 
                             @error('content')
                                     <strong class="text-sm text-danger">{{ $message }}</strong>
@@ -399,59 +401,7 @@
 
                         </div>
                     </div>
-                    {{-- <div class="col-lg-6 col-md-6 ">
-                        <div class="mb-3">
-                            <div class="row">
-                                <div class="row">
-                                    <div class=" mb-2">
-                                         <label class="form-label">Country Thumbnail* <span
-                                            class="badge badge-light text-dark tag-pills-sm-mb">w:640 /
-                                            h:780</span></label>
-                                    <input type="file" name="thumbnail"
-                                        class="form-control @error('thumbnail') is-invalid @enderror">
-                                    @error('thumbnail')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-2">
-                                        <img src="{{ asset('uploads/country/' . $country->thumbnail) }}" width="100%"
-                                        alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="mb-3">
-                            <div class="row ">
-                              <div class="row">
-                                 <div class="col-10">
-                                    <label class="form-label">Country Banner* <span
-                                            class="badge badge-light text-dark tag-pills-sm-mb">w:2050 /
-                                            h:605</span></label>
-                                    <input type="file" name="banner"
-                                        class="form-control @error('banner') is-invalid @enderror">
-                                    @error('banner')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-6 mt-2">
-                                    <img src="{{ asset('uploads/country/' . $country->banner) }}" width="100%"
-                                        alt="">
-                                </div>
-                              </div>
 
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="d-flex justify-content-end gap-2">
                     {{-- <a class="btn btn-dark" href="{{ route('country-blog.index') }}">Back</a> --}}
@@ -479,14 +429,10 @@
 </div>
     <div class="card">
         <div class="card-header  d-flex justify-content-between" style="padding-bottom:0 !important; ">
-            <h4>Content Title</h4>
-            <div>
-
-
-            </div>
+            <h5 style="font-weight: bold;">Content Title</h5>
         </div>
         <div class="card-body">
-            <section class="mb-3 ">
+            <section class="mb-3 border-bottom ">
             @forelse ($country->contents as $content)
                 <a class="btn btn-sm btn-outline-dark my-2" href="#{{ $content->title }}">{{ $content->title }}</a>
             @empty
@@ -495,7 +441,7 @@
 
             @forelse ($country->contents as $content)
                 <div id="{{ $content->title }}">
-                    <h4 class="mt-4 mb-2" >Content Description</h4>
+                    <h5 class="mt-4 mb-2"style="font-weight: bold;" >Content Description:</h5>
                     <div class="row mb-3">
                         <div class="col-12">
                             <p>{!! $content->content !!}</p>
@@ -515,73 +461,114 @@
 
         </div>
     </div>
+    <div class="container-fluid">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <h3 class="faw-Capital">fequently asked questions </h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="card">
         <div class="card-header  d-flex justify-content-between" style="padding-bottom:0 !important; ">
-            <h4>Faqs</h4>
-            <div>
-
-
-            </div>
+            <h5 style="font-weight: bold;"></h5>
         </div>
-<div class="card-body " id="tablerow">
-
-    @forelse ($country->faqs as $faq)
-        <div class="">
-            <p>{{$faq->question}}</p>
-            <p>{{$faq->answer}}</p>
-            <div class="row mb-3 ">
-                <div class="col-12 mb-3 ">
-                    {{-- <h2>{{ $content->title }}</h2> --}}
-                    {{-- <a href="{{ route('faq.edit',$faq->id) }}" class="btn btn-sm btn-outline-dark editfaq" >Edit</a> --}}
-                    <a href="javascript:void(0)" class="btn btn-sm btn-outline-dark editfaq"  id="editfaq"  data-id="{{ $faq->id}}"  data-bs-toggle="modal" data-bs-target="#faqEditModal" >Edit</a>
-                    {{-- <a class="btn btn-sm btn-outline-dark" href="{{route('faq.edit',$faq->id)}}">Edit</a> --}}
-                    <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteID('{{ $faq->id }}')"
-                        data-bs-toggle="modal" data-bs-target="#tooltipmodal">Delete</a>
+    <div class="card-body " id="tablerow">
+        @forelse ($country->faqs as $faq)
+            <div class="">
+                <p>{{$faq->question}}</p>
+                <p>{{$faq->answer}}</p>
+                <div class="row mb-3 ">
+                    <div class="col-12 mb-3 ">
+                        {{-- <h2>{{ $content->title }}</h2> --}}
+                        {{-- <a href="{{ route('faq.edit',$faq->id) }}" class="btn btn-sm btn-outline-dark editfaq" >Edit</a> --}}
+                        <a href="javascript:void(0)" class="btn btn-sm btn-outline-dark editfaq"  id="editfaq"  data-id="{{ $faq->id}}"  data-bs-toggle="modal" data-bs-target="#faqEditModal" >Edit</a>
+                        {{-- <a class="btn btn-sm btn-outline-dark" href="{{route('faq.edit',$faq->id)}}">Edit</a> --}}
+                        <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteID('{{ $faq->id }}')"
+                            data-bs-toggle="modal" data-bs-target="#tooltipmodal">Delete</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr>
-    @empty
-        No Data found
-    @endforelse
-
+            <hr>
+        @empty
+            No Data found
+        @endforelse
         </div>
     </div>
 @endsection
 @section('script')
 {{-- summernote --}}
 <script>
+    jQuery.noConflict();
+    jQuery(document).ready(function($) {
+        var maxChars = 3500;
+    // Your jQuery code using $ here
     $('#summernote').summernote({
-      tabsize: 2,
-      height: 120,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ],
-      callbacks: {
-        onKeyup: function(e) {
-          var content = $(this).summernote('code');
-          var wordCount = content.replace(/<(?:.|\n)*?>/gm, '').split(/\s+/).length;
-          $('#wordCount').text(wordCount + " words");
-
-          // Limiting word count to 1000
-          if (wordCount > 10) {
-            $(this).summernote('code', content.split(/\s+/).slice(0, 1000).join(' '));
-            $('#wordCount').text("1000 words (maximum)");
-            $('#submitButton').prop('disabled', true);
-          } else {
-            $('#submitButton').prop('disabled', false);
+    tabsize: 2,
+    height: 120,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ],
+        callbacks: {
+          onInit: function() {
+            updateCharCount();
+          },
+          onKeyup: function(e) {
+            updateCharCount();
+          },
+          onImageUpload: function(files) {
+            for (var i = 0; i < files.length; i++) {
+              insertImage(files[i]);
+            }
+          },
+          onChange: function(contents, $editable) {
+            updateCharCount();
           }
         }
-      }
-    });
-  </script>
+      });
 
+      function updateCharCount() {
+        var remainingChars = maxChars;
+        var htmlContent = $('#summernote').summernote('code');
+        var imgTags = htmlContent.match(/<img[^>]*>/g);
+
+        if (imgTags !== null) {
+          remainingChars -= imgTags.length * 400;
+        }
+
+        remainingChars -= htmlContent.replace(/<img[^>]*>/g, '').replace(/(<([^>]+)>)/gi, '').length;
+        $('#charCount').text(remainingChars);
+
+        if (remainingChars < 0) {
+          $('#submitButton').prop('disabled', true);
+        } else {
+          $('#submitButton').prop('disabled', false);
+        }
+      }
+
+      function insertImage(file) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          var img = document.createElement('img');
+          img.src = reader.result;
+          $('#summernote').summernote('insertNode', img);
+          updateCharCount();
+        }
+        reader.readAsDataURL(file);
+      }
+  });
+
+
+
+</script>
 
 
 {{-- summernote --}}
