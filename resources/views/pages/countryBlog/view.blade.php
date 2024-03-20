@@ -26,7 +26,7 @@
             display: flex   ;
             overflow-x: auto;
             white-space: nowrap;
-            width: 100%;
+            width: 100% !important;
             border-collapse: collapse;
             justify-content: center;
             align-items: center;
