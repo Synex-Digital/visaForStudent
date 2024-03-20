@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Dashboard;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountryBlogController;
 use App\Http\Controllers\CountryBlogItemController;
-use App\Http\Controllers\Dashboard;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -17,5 +19,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resources([
         'country-blog'  => CountryBlogController::class,
         'blog-item'     => CountryBlogItemController::class,
+        'faq'           => FaqController::class,
     ]);
 });

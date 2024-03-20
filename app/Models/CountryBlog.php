@@ -12,4 +12,7 @@ class CountryBlog extends Model
     public function contents(){
         return $this->hasMany(CountryBlogItems::class, 'country_blog_id');
     }
+    public function faqs(){
+        return $this->hasMany(Faq::class, 'country_id');
+    }
 }
