@@ -55,7 +55,12 @@
                 /* Add your CSS properties for the img element here */
 
             }
-           }
+            table:not(.note-editable > table) {
+
+            justify-content: normal !important;
+            align-items: normal !important;
+        }
+        }
         @media (max-width: 767px) {
             .table {
                 font-size: 10px; /* Adjust font size for smaller screens */
