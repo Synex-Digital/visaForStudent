@@ -20,7 +20,11 @@
             max-width: 100%;
             max-height: 100%;
         }
-
+        ul{
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 20px !important;
+        }
 
         table:not(.note-editable > table) {
             display: flex   ;

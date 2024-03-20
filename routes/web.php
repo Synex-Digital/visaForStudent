@@ -9,7 +9,7 @@ use App\Http\Controllers\FaqController;
 
 Route::get('/', function () {
     return redirect('/login');
-});
+})->name('dashboard');
 
 Auth::routes();
 
