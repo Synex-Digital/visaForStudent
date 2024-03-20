@@ -30,7 +30,7 @@ class CountryAPIController extends Controller
     public function countrySlugs($slugs): JsonResponse
     {
         //check if country exists or not
-        $country = CountryBlog::with('contents')->where('slugs', $slugs)->first();
+        $country = CountryBlog::with('contents', 'faqs')->where('slugs', $slugs)->first();
         if (!$country) {
             return response()->json([
                 'status' => 0,
