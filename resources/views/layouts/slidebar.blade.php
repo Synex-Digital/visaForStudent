@@ -27,7 +27,7 @@
                                 aria-hidden="true"></i></div>
                     </li>
 
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav active" href="{{route('dashboard')}}">
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav active" href="{{route('dashboardhome')}}">
 
                         <svg class="fill-icon">
                             <use href="../assets/svg/icon-sprite.svg#fill-home"></use>
