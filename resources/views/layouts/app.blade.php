@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Admin - 45 Degree Education Consultancy</title>
     @include('layouts.headerLink')
     @yield('style')
 </head>

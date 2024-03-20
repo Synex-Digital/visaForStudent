@@ -23,3 +23,10 @@
 <link id="color" rel="stylesheet" href="{{ asset('assets/css/color-1.css') }}" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+<link rel="shortcut icon" href="{{asset('uploads/logo4.png')}}" type="image/x-icon">
+<style>
+    .simplebar-content-wrapper{
+        margin-top: 55px;
+    }
+</style>
+
