@@ -49,7 +49,7 @@
                                     <div class="form-input position-relative">
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                         name="password" required autocomplete="current-password" placeholder="Password">
-                                        <div class="show-hide"><span class="show"> </span></div>
+                                        {{-- <div class="show-hide"><span class="show"> </span></div> --}}
                                     </div>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">

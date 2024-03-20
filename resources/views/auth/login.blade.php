@@ -37,7 +37,7 @@
                                     <div class="form-input position-relative">
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                                         name="password" required autocomplete="current-password" placeholder="Password">
-                                        <div class="show-hide"><span class="show"> </span></div>
+                                        {{-- <div class="show-hide"><span class="show"> </span></div> --}}
                                     </div>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                                 <div class="form-group mb-0">
                                     <div class="checkbox p-0">
                                         <input id="checkbox1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="text-muted" for="checkbox1">Remember password</label>
+                                        {{-- <label class="text-muted" for="checkbox1">Remember password</label> --}}
                                     </div><a class="link" href="{{ route('password.request') }}">Forgot password?</a>
                                     <div class="text-end mt-3">
                                         <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
