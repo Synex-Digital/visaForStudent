@@ -48,7 +48,7 @@
 
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#">
-                            <i data-feather="user" class="text-white"></i>
+                            <i data-feather="map" class="text-white"></i>
                             <span>Country </span>
                         </a>
                         <ul class="sidebar-submenu">
@@ -56,6 +56,14 @@
                             <li><a  href="{{ route('country-blog.create') }}">Country Create</a></li>
                         </ul>
                     </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav active" href="{{route('users')}}">
+
+                        <svg class="fill-icon">
+                            <use href="../assets/svg/icon-sprite.svg#fill-user"></use>
+                        </svg><span>Users</span><div class="according-menu"></div></a>
+                    </li>
+
+
                 </ul>
             </div>
             {{-- <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div> --}}

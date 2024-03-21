@@ -17,12 +17,12 @@
                     <div class="d-flex align-items-center profile-media"><img class="b-r-10 img-40"
                             src="../assets/images/dashboard/profile.png" alt="">
                         <div class="flex-grow-1"><span>{{ Auth::user()->name }}</span>
-                            <p class="mb-0">Admin <i class="middle fa fa-angle-down"></i></p>
+                            <p class="mb-0">Admin </p>
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        {{-- <li><a href="user-profile.html"><i data-feather="user"></i><span>Account </span></a></li>
-                        <li><a href="email-application.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
+                        <li><a href="{{route('profile.index')}}"><i data-feather="user"></i><span>Profile </span></a></li>
+                      {{--   <li><a href="email-application.html"><i data-feather="mail"></i><span>Inbox</span></a></li>
                         <li><a href="task.html"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                         <li><a href="edit-profile.html"><i data-feather="settings"></i><span>Settings</span></a></li> --}}
 

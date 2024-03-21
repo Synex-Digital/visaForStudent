@@ -36,7 +36,8 @@
 
     </div>
 
-    @yield('script')
+    @yield('summernote_script')
     @include('layouts.footerLink')
+    @yield('script')
 </body>
 </html>

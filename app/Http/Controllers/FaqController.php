@@ -37,7 +37,7 @@ class FaqController extends Controller
         $faq->question = $request->question;
         $faq->answer = $request->answer;
         $faq->save();
-        return back();
+        return back()->with('succ', 'FAQ added successfully');
     }
 
     /**
