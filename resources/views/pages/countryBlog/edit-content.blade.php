@@ -79,12 +79,29 @@
 @endsection
 @section('content')
 <div class="">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Update Country Content</h3>
+    <div class="row ">
+        <div class="col-lg-12 ">
+            <div class="container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-sm-6 ps-0">
+                            <h3>Update Country Content</h3>
+                        </div>
+                        <div class="col-sm-6 pe-0">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">
+                                        <img src="{{ asset('assets/svg/house-chimney.svg') }}" alt=""></a></li>
+                                <li class="breadcrumb-item">Country</li>
+                                <li class="breadcrumb-item">View</li>
+                                <li class="breadcrumb-item active">{{$countryBlog->title}}</li>
+                                <li class="breadcrumb-item active">Edit</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="card mt-3">
+
                 <div class="card-body">
                     <form action="{{ route('blog-item.update',$countryBlog->id) }}" method="POST">
                         @csrf
@@ -93,7 +110,7 @@
 
                         <div class="">
                             <div class="mb-3">
-                                <label class="form-label">Title*</label>
+                                <label class="form-label fs-6">Title*</label>
 
                                 <input type="text" name="title"
                                     class="form-control @error('title') is-invalid @enderror" placeholder="Title" value="{{$countryBlog->title}}">
@@ -105,10 +122,11 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Content*</label>
+                                <label class="form-label fs-6">Content*</label>
                                 {{-- <input type="text" name="title" value="{{ old('title') }}"
                                     class="form-control @error('title') is-invalid @enderror" placeholder="Title"> --}}
                                 <textarea class="form-control" name="content" id="summernote" cols="70" rows="50" > {{$countryBlog->content}}</textarea>
+                                <p>Characters left: <span id="charCount">3500</span></p>
                                 @error('content')
                                     <strong class="text-sm text-danger">{{ $message }}</strong>
                                 @enderror
@@ -117,7 +135,7 @@
                         <div class="modal-footer">
 
 
-                            <button class="btn btn-dark" type="submit">Update</button>
+                            <button class="btn btn-dark" id="submitButton" type="submit">Update</button>
                         </div>
                     </form>
 
@@ -128,38 +146,76 @@
 </div>
 
 @endsection
-@section('script')
+@section('summernote_script')
 {{-- summernote --}}
 <script>
+    jQuery.noConflict();
+    jQuery(document).ready(function($) {
+        var maxChars = 3500;
+    // Your jQuery code using $ here
     $('#summernote').summernote({
-      tabsize: 2,
-      height: 500,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-      ],
-      callbacks: {
-        onKeyup: function(e) {
-          var content = $(this).summernote('code');
-          var wordCount = content.replace(/<(?:.|\n)*?>/gm, '').split(/\s+/).length;
-          $('#wordCount').text(wordCount + " words");
-
-          // Limiting word count to 1000
-          if (wordCount > 10) {
-            $(this).summernote('code', content.split(/\s+/).slice(0, 1000).join(' '));
-            $('#wordCount').text("1000 words (maximum)");
-            $('#submitButton').prop('disabled', true);
-          } else {
-            $('#submitButton').prop('disabled', false);
+    tabsize: 2,
+    height: 500,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ],
+        callbacks: {
+          onInit: function() {
+            updateCharCount();
+          },
+          onKeyup: function(e) {
+            updateCharCount();
+          },
+          onImageUpload: function(files) {
+            for (var i = 0; i < files.length; i++) {
+              insertImage(files[i]);
+            }
+          },
+          onChange: function(contents, $editable) {
+            updateCharCount();
           }
         }
+      });
+
+      function updateCharCount() {
+        var remainingChars = maxChars;
+        var htmlContent = $('#summernote').summernote('code');
+        var imgTags = htmlContent.match(/<img[^>]*>/g);
+
+        if (imgTags !== null) {
+          remainingChars -= imgTags.length * 400;
+        }
+
+        remainingChars -= htmlContent.replace(/<img[^>]*>/g, '').replace(/(<([^>]+)>)/gi, '').length;
+        $('#charCount').text(remainingChars);
+
+        if (remainingChars < 0) {
+          $('#submitButton').prop('disabled', true);
+        } else {
+          $('#submitButton').prop('disabled', false);
+        }
       }
-    });
-  </script>
+
+      function insertImage(file) {
+        var reader = new FileReader();
+        reader.onloadend = function() {
+          var img = document.createElement('img');
+          img.src = reader.result;
+          $('#summernote').summernote('insertNode', img);
+          updateCharCount();
+        }
+        reader.readAsDataURL(file);
+      }
+  });
+
+
+
+</script>
 
 @endsection

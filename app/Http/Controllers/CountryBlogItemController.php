@@ -89,7 +89,7 @@ class CountryBlogItemController extends Controller
         $countryBlogItems->title = $request->title;
         $countryBlogItems->content = $request->content;
         $countryBlogItems->save();
-        return redirect(route('country-blog.show',$countryBlogItems->country_blog_id));
+        return redirect(route('country-blog.show',$countryBlogItems->country_blog_id))->with('succ', 'Content Updated successfully');
     }
 
     /**

@@ -14,17 +14,23 @@
             display: flex;
             margin: auto;
         }
+        .note-editable > ul{
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 20px !important;
+        }
+        .customUl > ul{
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 20px !important;
+        }
         iframe {
             display: block;
             margin: auto;
             max-width: 100%;
             max-height: 100%;
         }
-        ul{
-            list-style-type: disc !important;
-            padding-left: 2rem !important;
-            margin-bottom: 20px !important;
-        }
+
 
         table:not(.note-editable > table) {
             display: flex   ;
@@ -304,7 +310,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Country Title*</label>
-                            <input type="text" name="title" value="{{ $country->title }}"
+                            <input type="text" name="country_title" value="{{ $country->title }}"
                                 class="form-control @error('country_title') is-invalid @enderror" placeholder="Title">
                             @error('country_title')
                                 <span class="invalid-feedback" role="alert">
@@ -452,7 +458,7 @@
                 <div id="{{ $content->title }}">
                     <h5 class="mt-4 mb-2"style="font-weight: bold;" >Content Description:</h5>
                     <div class="row mb-3">
-                        <div class="col-12">
+                        <div class="col-12 customUl">
                             <p>{!! $content->content !!}</p>
                         </div>
                         <div class="col-12 mb-3 ">
@@ -507,7 +513,7 @@
         </div>
     </div>
 @endsection
-@section('script')
+@section('summernote_script')
 {{-- summernote --}}
 <script>
     jQuery.noConflict();
@@ -579,7 +585,8 @@
 
 </script>
 
-
+@endsection
+@section('script')
 {{-- summernote --}}
     @if (session('succ'))
         <script>
@@ -590,6 +597,7 @@
             }
         </script>
     @endif
+
     @if (session('err'))
         <script>
             const toastLiveExample = document.getElementById("liveToast1");
