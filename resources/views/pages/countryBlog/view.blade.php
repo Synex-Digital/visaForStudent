@@ -501,7 +501,7 @@
                         {{-- <a href="{{ route('faq.edit',$faq->id) }}" class="btn btn-sm btn-outline-dark editfaq" >Edit</a> --}}
                         <a href="javascript:void(0)" class="btn btn-sm btn-outline-dark editfaq"  id="editfaq"  data-id="{{ $faq->id}}"  data-bs-toggle="modal" data-bs-target="#faqEditModal" >Edit</a>
                         {{-- <a class="btn btn-sm btn-outline-dark" href="{{route('faq.edit',$faq->id)}}">Edit</a> --}}
-                        <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteID('{{ $faq->id }}')"
+                        <a class="btn btn-sm btn-outline-danger" href="#" onclick="setDeleteIDFaq('{{ $faq->id }}')"
                             data-bs-toggle="modal" data-bs-target="#tooltipmodal">Delete</a>
                     </div>
                 </div>
@@ -609,6 +609,13 @@
     @endif
     <script>
         function setDeleteID(id) {
+            document.getElementById('deleteID').value = id;
+            // Set the form action dynamically
+            document.getElementById('deleteForm').action = "{{ route('blog-item.destroy', ':id') }}".replace(':id', id);
+        }
+    </script>
+    <script>
+        function setDeleteIDFaq(id) {
             document.getElementById('deleteID').value = id;
             // Set the form action dynamically
             document.getElementById('deleteForm').action = "{{ route('faq.destroy', ':id') }}".replace(':id', id);
