@@ -69,7 +69,8 @@
 
             justify-content: normal !important;
             align-items: normal !important;
-        }
+            }
+
         }
         @media (max-width: 767px) {
             .table {
@@ -458,7 +459,7 @@
                 <div id="{{ $content->title }}">
                     <h5 class="mt-4 mb-2"style="font-weight: bold;" >Content Description:</h5>
                     <div class="row mb-3">
-                        <div class="col-12 customUl">
+                        <div class="col-lg-12 col-md-12      customUl">
                             <p>{!! $content->content !!}</p>
                         </div>
                         <div class="col-12 mb-3 ">

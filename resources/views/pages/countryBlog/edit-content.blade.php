@@ -6,74 +6,90 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style>
     img:not(.note-editable > p > img) {
-           width: 100% ;
-           display: flex !important;
-           margin: auto !important;
-       }
-       .note-editable > p > img{
-           display: flex;
-           margin: auto;
-       }
-       iframe {
-           display: block;
-           margin: auto;
-           max-width: 100%;
-           max-height: 100%;
-       }
+            width: 100% ;
+            display: flex !important;
+            margin: auto !important;
+        }
+        .note-editable > p > img{
+            display: flex;
+            margin: auto;
+        }
+        .note-editable > ul{
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 20px !important;
+        }
+        .customUl > ul{
+            list-style-type: disc !important;
+            padding-left: 2rem !important;
+            margin-bottom: 20px !important;
+        }
+        iframe {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
 
 
-       table:not(.note-editable > table) {
-           display: flex   ;
-           overflow-x: auto;
-           white-space: nowrap;
-           width: 100%;
-           border-collapse: collapse;
-           justify-content: center;
-           align-items: center;
-       }
+        table:not(.note-editable > table) {
+            display: flex   ;
+            overflow-x: auto;
+            white-space: nowrap;
+            width: 100% !important;
+            border-collapse: collapse;
+            justify-content: center;
+            align-items: center;
+        }
 
-   table th,
-   table td {
-       padding: 8px;
-       border: 1px solid #ccc;
-       word-wrap: break-word;
-   }
+    table th,
+    table td {
+        padding: 8px;
+        border: 1px solid #ccc;
+        word-wrap: break-word;
+    }
 
 
-       @media (max-width: 576px) {
-           .table {
-               font-size: 8px; /* Adjust font size for smaller screens */
-           }
-           img:not(.note-editable > p > img) {
-           width: 100% !important;
-           }
-           iframe {
-               width: 95%;
-               height: 100%;
-           }
-           .note-editable img {
-               /* Add your CSS properties for the img element here */
+        @media (max-width: 576px) {
+            .table {
+                font-size: 8px; /* Adjust font size for smaller screens */
+            }
+            img:not(.note-editable > p > img) {
+            width: 100% !important;
+            }
+            iframe {
+                width: 95%;
+                height: 100%;
+            }
+            .note-editable img {
+                /* Add your CSS properties for the img element here */
 
-           }
-          }
-       @media (max-width: 767px) {
-           .table {
-               font-size: 10px; /* Adjust font size for smaller screens */
-           }
+            }
+            table:not(.note-editable > table) {
 
-           img:not(.note-editable > p > img) {
-               width: 100% !important;
-           }
-           iframe {
-               width: 95%;
-               height: 100%;
-           }
-       }
-       @media (min-width: 768px) and (max-width: 992px) {
-           img:not(.note-editable > p > img) {
-               width: 100% !important;
-           }
-       }
+            justify-content: normal !important;
+            align-items: normal !important;
+            }
+
+        }
+        @media (max-width: 767px) {
+            .table {
+                font-size: 10px; /* Adjust font size for smaller screens */
+            }
+
+            img:not(.note-editable > p > img) {
+                width: 100% !important;
+            }
+            iframe {
+                width: 95%;
+                height: 100%;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 992px) {
+            img:not(.note-editable > p > img) {
+                width: 100% !important;
+            }
+        }
 
 </style>
 @endsection
